@@ -1,0 +1,11 @@
+dist/
+node_modules/
+.qx-agent/
+.cc_ref/
+sandbox/
+cc_src.zip
+agent.config.json
+mcp.config.json
+mcp.minimax.config.json
+.env
+.env.local

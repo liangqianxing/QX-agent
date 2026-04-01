@@ -1,0 +1,10 @@
+{
+  "servers": [
+    {
+      "name": "qx-web-search",
+      "transport": "stdio",
+      "command": "node",
+      "args": ["scripts/mcp-web-search-server.mjs"]
+    }
+  ]
+}

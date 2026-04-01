@@ -1,0 +1,14 @@
+{
+  "provider": "deepseek",
+  "model": "deepseek-chat",
+  "baseUrl": "https://api.deepseek.com",
+  "sessionName": "default",
+  "maxSteps": 16,
+  "enableTools": true,
+  "enableSkills": true,
+  "skillsDir": "skills",
+  "mcpConfigPath": "mcp.config.json",
+  "timeoutMs": 300000,
+  "shellTimeoutMs": 20000,
+  "systemPrompt": "You are QX Agent, a pragmatic terminal-based AI assistant."
+}

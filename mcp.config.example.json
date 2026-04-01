@@ -1,0 +1,10 @@
+{
+  "servers": [
+    {
+      "name": "qx-demo",
+      "transport": "stdio",
+      "command": "node",
+      "args": ["scripts/mcp-demo-server.mjs"]
+    }
+  ]
+}

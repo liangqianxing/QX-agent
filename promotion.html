@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>QX Agent CLI - 轻量级AI代理终端工具</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ <style>
+  * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+  }
+  
+  :root {
+   --primary-color: #2563eb;
+   --secondary-color: #7c3aed;
+   --dark-bg: #0f172a;
+   --card-bg: #1e293b;
+   --text-light: #f8fafc;
+   --text-gray: #94a3b8;
+   --accent-color: #06b6d4;
+   --success-color: #10b981;
+   --border-radius: 12px;
+   --transition: all 0.3s ease;
+  }
+  
+  body {
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   background-color: var(--dark-bg);
+   color: var(--text-light);
+   line-height: 1.6;
+  }
+  
+  .container {
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 0 20px;
+  }
+  
+  /* 导航栏样式 */
+  .navbar {
+   background-color: rgba(15, 23, 42, 0.95);
+   backdrop-filter: blur(10px);
+   position: fixed;
+   top: 0;
+   width: 100%;
+   z-index: 1000;
+   padding: 1rem 0;
+   border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  }
+  
+  .nav-container {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+  }
+  
+  .logo {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   font-size: 1.5rem;
+   font-weight: bold;
+   color: var(--text-light);
+   text-decoration: none;
+  }
+  
+  .logo i {
+   color: var(--accent-color);
+  }
+  
+  .nav-links {
+   display: flex;
+   gap: 2rem;
+  }
+  
+  .nav-links a {
+   color: var(--text-gray);
+   text-decoration: none;
+   transition: var(--transition);
+   font-weight: 500;
+  }
+  
+  .nav-links a:hover {
+   color: var(--accent-color);
+  }
+  
+  /* 英雄区域 */
+  .hero {
+   padding: 120px 0 80px;
+   text-align: center;
+   background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  }
+  
+  .hero h1 {
+   font-size: 3.5rem;
+   margin-bottom: 1rem;
+   background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+   -webkit-background-clip: text;
+   background-clip: text;
+   color: transparent;
+  }
+  
+  .hero-subtitle {
+   font-size: 1.5rem;
+   color: var(--text-gray);
+   margin-bottom: 2rem;
+   max-width: 800px;
+   margin-left: auto;
+   margin-right: auto;
+  }
+  
+  .cta-buttons {
+   display: flex;
+   gap: 1rem;
+   justify-content: center;
+   margin-top: 2rem;
+  }
+  
+  .btn {
+   padding: 12px 28px;
+   border-radius: var(--border-radius);
+   font-weight: 600;
+   text-decoration: none;
+   transition: var(--transition);
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+  }
+  
+  .btn-primary {
+   background-color: var(--primary-color);
+   color: white;
+  }
+  
+  .btn-primary:hover {
+   background-color: #1d4ed8;
+   transform: translateY(-2px);
+   box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+  }
+  
+  .btn-secondary {
+   background-color: transparent;
+   color: var(--text-light);
+   border: 2px solid var(--text-gray);
+  }
+  
+  .btn-secondary:hover {
+   border-color: var(--accent-color);
+   color: var(--accent-color);
+   transform: translateY(-2px);
+  }
+  
+  /* 功能卡片 */
+  .section {
+   padding: 80px 0;
+  }
+  
+  .section-title {
+   text-align: center;
+   font-size: 2.5rem;
+   margin-bottom: 3rem;
+   color: var(--text-light);
+  }
+  
+  .features-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   gap: 2rem;
+   margin-top: 3rem;
+  }
+  
+  .feature-card {
+   background-color: var(--card-bg);
+   border-radius: var(--border-radius);
+   padding: 2rem;
+   transition: var(--transition);
+   border: 1px solid rgba(148, 163, 184, 0.1);
+  }
+  
+  .feature-card:hover {
+   transform: translateY(-5px);
+   border-color: var(--accent-color);
+   box-shadow: 0 10px 30px rgba(6, 182, 212, 0.2);
+  }
+  
+  .feature-icon {
+   font-size: 2.5rem;
+   color: var(--accent-color);
+   margin-bottom: 1rem;
+  }
+  
+  .feature-card h3 {
+   font-size: 1.5rem;
+   margin-bottom: 1rem;
+   color: var(--text-light);
+  }
+  
+  .feature-card p {
+   color: var(--text-gray);
+   margin-bottom: 1.5rem;
+  }
+  
+  /* 技术栈展示 */
+  .tech-stack {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 1rem;
+   justify-content: center;
+   margin-top: 2rem;
+  }
+  
+  .tech-item {
+   background-color: var(--card-bg);
+   padding: 0.8rem 1.5rem;
+   border-radius: 50px;
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   font-weight: 500;
+   border: 1px solid rgba(148, 163, 184, 0.1);
+  }
+  
+  .tech-item i {
+   color: var(--accent-color);
+  }
+  
+  /* 代码示例 */
+  .code-section {
+   background-color: var(--card-bg);
+   border-radius: var(--border-radius);
+   padding: 2rem;
+   margin-top: 2rem;
+   overflow-x: auto;
+  }
+  
+  .code-header {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   margin-bottom: 1rem;
+   padding-bottom: 1rem;
+   border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+  }
+  
+  pre {
+   background-color: #0d1117;
+   padding: 1.5rem;
+   border-radius: 8px;
+   overflow-x: auto;
+   font-family: 'Courier New', monospace;
+   font-size: 0.9rem;
+   line-height: 1.5;
+  }
+  
+  code {
+   color: #c9d1d9;
+  }
+  
+  .keyword { color: #ff7b72; }
+  .string { color: #a5d6ff; }
+  .comment { color: #8b949e; }
+  .function { color: #d2a8ff; }
+  .number { color: #79c0ff; }
+  
+  /* 安装指南 */
+  .steps {
+   display: flex;
+   flex-direction: column;
+   gap: 1.5rem;
+   margin-top: 2rem;
+  }
+  
+  .step {
+   display: flex;
+   align-items: flex-start;
+   gap: 1rem;
+   background-color: var(--card-bg);
+   padding: 1.5rem;
+   border-radius: var(--border-radius);
+   border-left: 4px solid var(--accent-color);
+  }
+  
+  .step-number {
+   background-color: var(--accent-color);
+   color: white;
+   width: 36px;
+   height: 36px;
+   border-radius: 50%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-weight: bold;
+   flex-shrink: 0;
+  }
+  
+  /* 页脚 */
+  .footer {
+   background-color: #0a0f1f;
+   padding: 3rem 0;
+   margin-top: 4rem;
+   border-top: 1px solid rgba(148, 163, 184, 0.1);
+  }
+  
+  .footer-content {
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   flex-wrap: wrap;
+   gap: 2rem;
+  }
+  
+  .footer-links {
+   display: flex;
+   gap: 2rem;
+  }
+  
+  .footer-links a {
+   color: var(--text-gray);
+   text-decoration: none;
+   transition: var(--transition);
+  }
+  
+  .footer-links a:hover {
+   color: var(--accent-color);
+  }
+  
+  .license {
+   color: var(--text-gray);
+   font-size: 0.9rem;
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 768px) {
+   .hero h1 {
+    font-size: 2.5rem;
+   }
+   
+   .hero-subtitle {
+    font-size: 1.2rem;
+   }
+   
+   .cta-buttons {
+    flex-direction: column;
+    align-items: center;
+   }
+   
+   .btn {
+    width: 100%;
+    max-width: 300px;
+    justify-content: center;
+   }
+   
+   .nav-links {
+    display: none;
+   }
+   
+   .footer-content {
+    flex-direction: column;
+    text-align: center;
+   }
+  }
+ </style>
+</head>
+<body>
+ <!-- 导航栏 -->
+ <nav class="navbar">
+  <div class="container nav-container">
+   <a href="#" class="logo">
+    <i class="fas fa-robot"></i>
+    <span>QX Agent CLI</span>
+   </a>
+   <div class="nav-links">
+    <a href="#features">功能</a>
+    <a href="#tech">技术栈</a>
+    <a href="#examples">示例</a>
+    <a href="#install">安装</a>
+    <a href="https://github.com" target="_blank">GitHub</a>
+   </div>
+  </div>
+ </nav>

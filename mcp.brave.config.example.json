@@ -1,0 +1,17 @@
+{
+  "servers": [
+    {
+      "name": "brave-search",
+      "transport": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@brave/brave-search-mcp-server",
+        "--transport",
+        "stdio",
+        "--brave-api-key",
+        "test-placeholder-key"
+      ]
+    }
+  ]
+}

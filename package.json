@@ -1,0 +1,42 @@
+{
+  "name": "qx-agent-cli",
+  "version": "0.1.0",
+  "description": "A minimal AI agent CLI inspired by a larger agentic terminal architecture.",
+  "type": "module",
+  "bin": {
+    "qx-agent": "dist/index.js"
+  },
+  "scripts": {
+    "clean": "node --eval \"require('node:fs').rmSync('dist', { recursive: true, force: true })\"",
+    "build": "npm run clean && tsc -p tsconfig.json",
+    "check": "tsc --noEmit -p tsconfig.json",
+    "dev": "tsx src/index.ts",
+    "mcp:demo-server": "node scripts/mcp-demo-server.mjs",
+    "mcp:web-search-server": "node scripts/mcp-web-search-server.mjs",
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "keywords": [
+    "ai",
+    "agent",
+    "cli",
+    "openai-compatible",
+    "tool-calling"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^18.3.28",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "ink": "^5.2.1",
+    "ink-text-input": "^6.0.0",
+    "react": "^18.3.1",
+    "zod": "^4.3.6"
+  }
+}
