@@ -2,7 +2,7 @@
 
 Chinese documentation: `README.zh-CN.md`
 
-Preview page: `https://raw.githack.com/liangqianxing/QX-agent/main/docs/index.html`
+Project page: `https://liangqianxing.github.io/QX-agent/`
 
 `QX Agent CLI` is a compact TypeScript AI agent terminal app with a clear runtime path:
 
