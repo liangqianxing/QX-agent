@@ -1,7 +1,7 @@
 # QX Agent CLI
 
 英文版见 `README.md`。
-在线项目页：`https://liangqianxing.github.io/QX-agent/`
+在线预览页：`https://raw.githack.com/liangqianxing/QX-agent/main/docs/index.html`
 
 `QX Agent CLI` 是一个用 TypeScript/Node.js 实现的轻量级 AI Agent 命令行项目，核心链路完整但规模不大，适合学习、二次开发和简历展示。
 
